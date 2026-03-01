@@ -3,6 +3,10 @@ import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+
+import { User } from '../Models/User.model';
+import { Role } from '../Models/Role.model';
+
 @Component({
   selector: 'user-list',
   standalone: true,
@@ -18,16 +22,16 @@ import { FormsModule } from '@angular/forms';
     .input-error {
         border: 1px solid #d9534f !important;
     }
-    
     td { vertical-align: top; }
   `]
 })
 
 export class UserListComponent implements OnInit {
-  allUsers: any[] = [];   // רשימת המשתמשים המלאה מהשרת
-  roles: any[] = [];      // רשימת התפקידים המלאה מהשרת
+  allUsers: User[] = [];   // רשימת המשתמשים המלאה מהשרת
+  roles: Role[] = [];      // רשימת התפקידים המלאה מהשרת
   filteredUsers: any[] = []; // הרשימה שמוצגת בטבלה
-  selectedUser: any = null;
+  selectedUser = {} as User;
+
   
 
   filterName: string = '';
@@ -44,17 +48,19 @@ export class UserListComponent implements OnInit {
 
   isNewUser: boolean = false;
   searchId: string = '';  
+  updatedData: any;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(data => {
+    this.userService.getUsers().subscribe((data: User[]) => {
       this.allUsers = data;
+      console.log(this.allUsers);
       this.filteredUsers = data; // תצוגה מלאה
     });
 
     // טעינת תפקידים ל-Combo Box
-    this.userService.getRoles().subscribe(data => {
+    this.userService.getRoles().subscribe((data: Role[]) => {
       this.roles = data;
     });
   }
@@ -63,11 +69,11 @@ export class UserListComponent implements OnInit {
   onSearch() {
     this.filteredUsers = this.allUsers.filter(user => {
       // חיפוש לפי שם (טקסט חופשי)
-      const nameMatch = user.name.toLowerCase().includes(this.filterName.toLowerCase());
+      const nameMatch = user.username.toLowerCase().includes(this.filterName.toLowerCase());
       
       // חיפוש לפי תפקיד (קוד מספר)
       // אם לא נבחר תפקיד (searchPosition === ""), נחזיר true לכולם
-      const positionMatch = this.filterPosition === "" || user.position == this.filterPosition;
+      const positionMatch = this.filterPosition === "" || user.role.code == this.filterPosition;
 
       return nameMatch && positionMatch;
     });
@@ -77,12 +83,16 @@ export class UserListComponent implements OnInit {
     return role ? role.description : 'לא הוגדר';
   }
 
+  getRole(roleCode: number): Role | undefined {
+      return this.roles.find(r => r.code === roleCode);
+  }
+
   // עריכה
   editUser(user: any) {
     this.selectedUser = { ...user }; // עותק כדי לאפשר ביטול 
     // העתקת הנתונים למשתנה עריכה
-    this.editName = user.name;
-    this.editPosition = user.position;
+    this.editName = user.username;
+    this.editPosition = user.role.code;
     this.editPhone = user.phone;
     this.editEmail = user.email;
     this.editIsActive = user.isActive;
@@ -90,37 +100,47 @@ export class UserListComponent implements OnInit {
 
   // שמירת השינויים
   saveChanges() {
-    if (this.selectedUser) {
-      const updatedData = { 
-        id: this.selectedUser.id,
-        name: this.editName,
-        phone: this.editPhone,
-        email: this.editEmail,
-        position: Number(this.editPosition), 
-        isActive: this.editIsActive,
-        createdDate: this.selectedUser.createdDate 
-      };
 
-      this.userService.updateUser(updatedData).subscribe(() => {
+    console.log('saveCahnges');
+    console.log(this.selectedUser)
+    console.log(this.selectedUser.id); 
+    if (this.selectedUser) {
+        console.log(this.selectedUser.id); 
+        console.log(this.allUsers);
+        this.updatedData = this.allUsers.find(u => u.id.toString() === this.selectedUser.id.toString());
+        console.log('selectedUser');
+        console.log(this.selectedUser);
+        console.log('updatedData');
+        console.log(this.updatedData);
+        this.updatedData.id =  this.selectedUser.id;
+        this.updatedData.username = this.editName;
+        this.updatedData.phone = this.editPhone;
+        this.updatedData.email = this.editEmail;
+        this.updatedData.role = this.getRole(this.editPosition);
+        this.updatedData.isActive = this.editIsActive;
+        this.updatedData.createDate = this.selectedUser.createdDate; 
+      };
+      
+      console.log(this.updatedData);
+      this.userService.updateUser(this.updatedData).subscribe(() => {
         // 1. עדכון הרשימה המלאה בזיכרון
-        const index = this.allUsers.findIndex(u => u.id === updatedData.id);
+        const index = this.allUsers.findIndex(u => u.id === this.updatedData.id);
         if (index !== -1) {
-          this.allUsers[index] = { ...updatedData };
+          this.allUsers[index] = { ...this.updatedData };
         }
 
         // 2. איפוס שדות החיפוש כדי שהסינון הבא יציג את כולם
         this.filterName = '';
         this.filterPosition = '';
-        this.selectedUser = null;
+        this.selectedUser = {} as User;
 
         // 3. הרצת הסינון מחדש 
         this.onSearch();
       });
     }
-  }
     
   cancelEdit() {
-    this.selectedUser = null;
+    this.selectedUser = {} as User;
     this.searchId = '';
     this.editName = '';
     this.editPosition = '';
@@ -132,18 +152,23 @@ export class UserListComponent implements OnInit {
   prepareNewUser() {
     this.cancelEdit(); // איפוס שדות קיימים
     this.isNewUser = true;
-    this.selectedUser = { id: '' }; // יצירת אובייקט ריק כדי להפעיל את ה-ngIf בטופס
+    this.selectedUser = {} as User;
     console.log('this.selectedUser: ' + this.selectedUser.id)
   }
 
   saveNewUser() {
-    const newUser = {
+    const newUser : User = {
       id: this.searchId,
-      name: this.editName,
-      position: Number(this.editPosition),
+      username: this.editName,
+      role: this.getRole(this.editPosition)!,
       phone: this.editPhone,
       email: this.editEmail,
-      isActive: true
+      isActive: true,
+      organizationlevels: null as any,
+      managerid: '',
+      isTemporaryPassword: false,
+      createdDate: '',
+      lastUpdateDate: ''
     };
 
     this.userService.addUser(newUser).subscribe(res => {

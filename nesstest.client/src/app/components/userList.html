@@ -35,12 +35,6 @@
                     </fieldset>
                 </form>
             </div>
-            <!-- <div class="newUser-Container col-md-6 col-sm-2 col-xs-12">
-                <div class="newUser-inner">
-                    <button id="AddUser" class="add-newUser bgColorStyle3"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                    <span>הוספת משתמש חדש</span>
-                </div>
-            </div> -->
             <div class="newUser-inner">
                 <button id="AddUser" class="add-newUser bgColorStyle3" (click)="prepareNewUser()">
                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -103,19 +97,19 @@
 
                         <!-- שם משתמש -->
                         <td data-th="שם משתמש">
-                            <span *ngIf="selectedUser?.id !== user.id">{{ user.name }}</span>
-                            <input *ngIf="selectedUser?.id === user.id" type="text" [(ngModel)]="editName" name="editName" class="form-control">
+                            <span *ngIf="selectedUser.id !== user.id">{{ user.username }}</span>
+                            <input *ngIf="selectedUser.id === user.id" type="text" [(ngModel)]="editName" name="editName" class="form-control">
                         </td>
 
                         <!-- תפקיד -->
                         <td data-th="תפקיד">
                             <!-- מצב תצוגה: קריאה לפונקציית התרגום -->
-                            <span *ngIf="selectedUser?.id !== user.id">
-                                {{ getRoleName(user.position) }}
+                            <span *ngIf="selectedUser.id !== user.id">
+                                {{user.role.description}}
                             </span>
 
                             <!-- מצב עריכה: Combo Box שמקושר ל-Code -->
-                            <select *ngIf="selectedUser?.id === user.id" 
+                            <select *ngIf="selectedUser.id === user.id" 
                                     [(ngModel)]="editPosition" 
                                     name="editPosition" 
                                     class="form-control">
@@ -127,10 +121,10 @@
                         </td>
                         <td data-th="טלפון">
                             <!-- מצב תצוגה -->
-                            <span *ngIf="selectedUser?.id !== user.id">{{ user.phone }}</span>
+                            <span *ngIf="selectedUser.id !== user.id">{{ user.phone }}</span>
 
                             <!-- מצב עריכה עם ולידציה -->
-                            <div *ngIf="selectedUser?.id === user.id">
+                            <div *ngIf="selectedUser.id === user.id">
                                 <input type="text" 
                                     [(ngModel)]="editPhone" 
                                     name="editPhone" 
@@ -148,8 +142,8 @@
                             </div>
                         </td>
                         <td data-th="דואל">
-                            <span *ngIf="selectedUser?.id !== user.id">{{ user.email }}</span>
-                            <div *ngIf="selectedUser?.id === user.id">
+                            <span *ngIf="selectedUser.id !== user.id">{{ user.email }}</span>
+                            <div *ngIf="selectedUser.id === user.id">
                                 <input id="userEmail" type="email" [(ngModel)]="editEmail"  name="editEmail" 
                                     required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #emailModel="ngModel" class="form-control">
                                 
@@ -165,17 +159,17 @@
 
                         <!-- עמודת פעיל - כעת עם אפשרות עריכה -->
                         <td data-th="פעיל" class="btnContainer">
-                            <span *ngIf="selectedUser?.id !== user.id">{{ user.isActive ? 'כן' : 'לא' }}</span>
-                            <input *ngIf="selectedUser?.id === user.id" type="checkbox" [(ngModel)]="editIsActive" name="editActive">
+                            <span *ngIf="selectedUser.id !== user.id">{{ user.isActive ? 'כן' : 'לא' }}</span>
+                            <input *ngIf="selectedUser.id === user.id" type="checkbox" [(ngModel)]="editIsActive" name="editActive">
                         </td>
 
                         <!-- עמודת פעולות -->
                         <td data-th="עדכון" class="btnContainer">
-                            <button *ngIf="selectedUser?.id !== user.id" type="button" class="editButton" (click)="editUser(user)">
+                            <button *ngIf="selectedUser.id !== user.id" type="button" class="editButton" (click)="editUser(user)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <div *ngIf="selectedUser?.id === user.id" class="edit-actions">
+                            <div *ngIf="selectedUser.id === user.id" class="edit-actions">
                                 <!-- בכפתור השמירה (בתוך הטבלה או בטופס) -->
                                 <button type="button" 
                                         (click)="saveChanges()" 

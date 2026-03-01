@@ -8,6 +8,7 @@ namespace Models
     {
         public virtual string Id { get; set; }
         public virtual int OrganizationlevelsId { get; set; }
+        public virtual int RoleId { get; set; }
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }
         public virtual string Phone { get; set; }

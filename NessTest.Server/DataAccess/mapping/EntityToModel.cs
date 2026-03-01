@@ -9,7 +9,11 @@ namespace Services.mapping
     {
         public EntityToModel()
         {
-            
+            CreateMap<Entities.Dbo.Users, Models.Users>().ReverseMap();
+
+            CreateMap<Entities.Lookup.Role, Models.RoleDto>().ReverseMap();
+
+            CreateMap<Entities.Dbo.Organizationlevels, Models.OrgLevelDto>().ReverseMap();
         }
     }
 }
