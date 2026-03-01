@@ -1,0 +1,40 @@
+.modal{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-body{
+    text-align:right;
+}
+
+.no-btn {
+  height: 40px;
+  color: #34495e;
+  padding: 0 10px 0 10px;
+  font-weight: 300;
+  background-color: #efefef;
+ }
+
+  .no-btn:hover {
+    background-color: #e8e8e8;
+  }
+
+.yes-btn {
+  height: 40px;
+  background-color: #e95901;
+  color: #fff;
+  font-weight: 300;
+  padding: 0 10px 0 10px;
+}
+
+.yes-btn:hover {
+  background-color: #f78222;
+}
+  .modal-footer {
+    display: unset !important;
+  }
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;       
+    }
+}

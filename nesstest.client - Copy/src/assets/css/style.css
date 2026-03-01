@@ -1,0 +1,2293 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-extrabolditalic-webfont.eot');
+    src: url('../fonts/opensanshebrew-extrabolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-extrabolditalic-webfont.woff') format('woff'), url('../fonts/opensanshebrew-extrabolditalic-webfont.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'open sans hebrewe';
+    src: url('../fonts/opensanshebrew-extrabold-webfont.eot');
+    src: url('../fonts/opensanshebrew-extrabold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-extrabold-webfont.woff') format('woff'), url('../fonts/opensanshebrew-extrabold-webfont.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-bolditalic-webfont.eot');
+    src: url('../fonts/opensanshebrew-bolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-bolditalic-webfont.woff') format('woff'), url('../fonts/opensanshebrew-bolditalic-webfont.ttf') format('truetype');
+    font-weight: italic;
+    font-style: 700;
+}
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-bold-webfont.eot');
+    src: url('../fonts/opensanshebrew-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-bold-webfont.woff') format('woff'), url('../fonts/opensanshebrew-bold-webfont.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-regular-webfont.eot');
+    src: url('../fonts/opensanshebrew-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-regular-webfont.woff') format('woff'), url('../fonts/opensanshebrew-regular-webfont.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-italic-webfont.eot');
+    src: url('../fonts/opensanshebrew-italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-italic-webfont.woff') format('woff'), url('../fonts/opensanshebrew-italic-webfont.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-light-webfont.eot');
+    src: url('../fonts/opensanshebrew-light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-light-webfont.woff') format('woff'), url('../fonts/opensanshebrew-light-webfont.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open sans hebrew';
+    src: url('../fonts/opensanshebrew-lightitalic-webfont.eot');
+    src: url('../fonts/opensanshebrew-lightitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensanshebrew-lightitalic-webfont.woff') format('woff'), url('../fonts/opensanshebrew-lightitalic-webfont.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+
+html {
+    font-family: 'open sans hebrew', 'Arial', sans-serif;
+    line-height: 1.15;
+    direction: rtl;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'open sans hebrew', 'Arial', sans-serif;
+    margin: 0;
+    margin: 0;
+    color: #000;
+}
+
+header a:focus, .mainNavigation button:focus, .mainNavigation a:focus {
+    outline: 2px solid #fff;
+}
+
+a:focus, button:focus {
+    outline: 2px solid #000;
+}
+
+a, button {
+    text-decoration: none;
+    transition: all .3s ease-in;
+    color: #0095cd;
+}
+
+    a:hover, button:hover {
+        transition: all .3s ease-in;
+    }
+
+p {
+    font-size: 18px;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/* ==========================================================================
+   Author's custom styles
+========================================================================== */
+
+
+.bgColorStyle1 {
+    background-color: #0095cd;
+}
+
+.bgColorStyle2 {
+    background-color: #eff3f6;
+}
+
+.bgColorStyle3 {
+    background-color: #a3cf16;
+}
+
+
+.headdingColor1 {
+    color: #0095cd;
+}
+
+.headdingColor2 {
+    color: #ffffff;
+}
+
+.linkColor1 {
+    color: #0095cd;
+}
+
+.buttonStyle {
+    background-color: #0095cd;
+    color: #fff;
+    border: none;
+    padding: 0px 15px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 900;
+    width: 110px;
+}
+
+    .buttonStyle:hover {
+        background-color: #03729c;
+    }
+
+.buttonStyle2 {
+    background-color: #a3cf16;
+    color: #fff;
+    border: none;
+    padding: 0px 15px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 900;
+    width: 110px;
+}
+
+    .buttonStyle2:hover, .buttonStyle3:hover {
+        background-color: #617b0c;
+    }
+
+.buttonStyle3 {
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #a3cf16;
+}
+
+.backToTop {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 50px;
+    right: 15px;
+    z-index: 100;
+    overflow: hidden;
+    background: #368ddd;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    -moz-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s;
+}
+
+    .backToTop:hover {
+        background-color: #24649e;
+    }
+
+    .backToTop.backToTop-is-visible {
+        visibility: visible;
+        opacity: 1;
+        transition: all .3s ease-in;
+    }
+
+    .backToTop.backToTop-fade-out {
+        opacity: .5;
+        transition: all .3s ease-in;
+    }
+
+span.glyphicon.glyphicon-menu-up {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    border: none;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #000;
+}
+
+    .navbar-toggle .icon-bar:nth-of-type(2) {
+        top: 1px;
+    }
+
+    .navbar-toggle .icon-bar:nth-of-type(3) {
+        top: 2px;
+    }
+
+.navbar-toggle .icon-bar {
+    position: relative;
+    transition: all 500ms ease-in-out;
+}
+
+.navbar-toggle.activeNav .icon-bar:nth-of-type(1) {
+    top: 6px;
+    transform: rotate(45deg);
+}
+
+.navbar-toggle.activeNav .icon-bar:nth-of-type(2) {
+    background-color: transparent;
+}
+
+.navbar-toggle.activeNav .icon-bar:nth-of-type(3) {
+    top: -6px;
+    transform: rotate(-45deg);
+}
+
+.centerWidth {
+    max-width: 1280px;
+    margin: auto;
+    position: relative;
+}
+
+.headerStyle {
+    padding: 15px 0px;
+}
+
+a.logo {
+    display: block;
+    float: left;
+}
+
+.logoPlace h1 {
+    font-size: 40px;
+    font-weight: 100;
+    display: block;
+    float: right;
+    margin: 17px 0px 0px 0px;
+}
+
+    .logoPlace h1 span {
+        font-weight: 600;
+        padding-left: 15px;
+    }
+
+.loginName {
+    text-align: left;
+    padding: 0px;
+    float: left !important;
+}
+
+button.loginSite {
+    background-color: transparent;
+    display: inline;
+    border: none;
+    margin: 0px 20px 0px 0px;
+    padding: 0px;
+    font-size: 18px;
+    border-bottom: 1px solid #0095cd;
+}
+
+    button.loginSite:hover {
+        color: #808c9b;
+    }
+
+p.userName {
+    color: #808c9b;
+    display: inline;
+    font-weight: 400;
+}
+
+nav.navbar {
+    padding: 0px;
+    margin: 0px;
+    border: 0;
+}
+
+ul.nav {
+    padding-right: 0px;
+}
+
+    ul.nav a {
+        color: #808c9b;
+        font-size: 18px;
+        font-weight: 400;
+        padding: 15px 0px;
+    }
+
+    ul.nav > li {
+        padding: 0px 15px;
+    }
+
+        ul.nav > li:first-child {
+            padding-right: 0px;
+        }
+
+    ul.nav a.activeLink {
+        font-weight: 600;
+        border-bottom: 3px solid #0095cd;
+        color: #4e545c;
+    }
+
+.nav > li > a:focus {
+    background-color: transparent;
+    outline: 1px solid #fff;
+}
+
+.nav > li > a:hover {
+    background-color: transparent;
+    color: #000;
+}
+
+.loginName {
+    padding: 14px 15px 0px 0px;
+}
+
+.MainContainer {
+    padding: 20px 0px 20px 0px;
+}
+
+
+.mainNavigation .container {
+    padding: 0px;
+}
+
+.footerContainer {
+    padding: 20px 15px;
+}
+
+.bradcrumbs {
+    padding: 15px 0px;
+}
+
+.bradcrumbs {
+    padding: 15px 0px;
+}
+
+    .bradcrumbs ul {
+        list-style: none;
+        padding: 0px;
+    }
+
+    .bradcrumbs li {
+        display: inline-block;
+        padding: 0px;
+    }
+
+    .bradcrumbs a.pathway span {
+        font-size: 14px;
+        color: #0095cd;
+    }
+
+section.bradcrumbs span {
+    color: #808c9b;
+    font-size: 14px;
+}
+
+span.divider {
+    padding: 0px 5px;
+}
+
+
+.tableStyle1 {
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+}
+
+    .tableStyle1 tr {
+        border-bottom: 1px solid #fff;
+    }
+
+        .tableStyle1 tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        .tableStyle1 tr:nth-child(odd) {
+            background-color: #f7f9fb;
+        }
+
+    .tableStyle1 thead tr {
+        background-color: #fff !important;
+    }
+
+    .tableStyle1 thead th {
+        text-align: right;
+        color: #0095cd;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 55px 10px 10px;
+    }
+
+    .tableStyle1 tbody td {
+        text-align: right;
+        color: #444d58;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 55px 8px 10px;
+    }
+
+    .tableStyle1 thead th button {
+        border: none;
+        background-color: transparent;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        text-align: center;
+        position: relative;
+    }
+
+        .tableStyle1 thead th button .fa {
+            position: absolute;
+            top: 0;
+        }
+
+td.btnContainer, th.btnContainer {
+    width: 100px;
+    padding-right: 0px !important;
+}
+
+nav.footerMenu ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+    nav.footerMenu ul li {
+        display: inline-block;
+        padding: 0px 10px;
+        border-right: 1px solid #0095cd;
+    }
+
+        nav.footerMenu ul li:first-child {
+            border-right: none;
+        }
+
+        nav.footerMenu ul li a {
+            font-size: 18px;
+        }
+
+.managment .container {
+    padding: 0px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.managment {
+    padding-bottom: 40px;
+}
+
+.formStyle label {
+    display: block;
+    font-size: 14px;
+    color: #0095cd;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+.formStyle input[type="text"], .formStyle input[type="password"], .formStyle input[type="search"] {
+    padding-right: 5px;
+    height: 37px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+}
+
+.formStyle textarea {
+    padding-right: 5px;
+    min-height: 140px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+}
+
+.addNew-detils input[type="text"] {
+    margin-bottom: 20px;
+}
+
+.formStyle input[type="text"]:hover, .formStyle input[type="search"]:hover, .formStyle textarea:hover, .filupp:hover {
+    background-color: #dcf5ff;
+}
+
+.formStyle input[type="text"]:focus, .formStyle input[type="search"]:focus, .formStyle textarea:focus, .filupp:focus {
+    outline: 1px solid #000000;
+}
+
+.searchForm div {
+    padding: 0px;
+    margin-left: 20px;
+}
+
+.searcButton {
+    margin-top: 20px;
+}
+
+.newUser-inner span {
+    display: block;
+    font-size: 14px;
+    color: #808c9b;
+}
+
+.newUser-inner {
+    text-align: center;
+    width: 120px;
+    float: left;
+}
+
+.add-newUser {
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+    .add-newUser:hover, .editButton:hover, .editButtonLink:hover, .duplicateButton:hover {
+        background-color: #6c8a0b;
+    }
+
+.editButton, .duplicateButton {
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #a3cf16;
+}
+
+.editButtonLink {
+    border: none;
+    width: 28px;
+    height: 18px;
+    color: #fff;
+    border-radius: 4px;
+    background-color: #a3cf16;
+    line-height: 9px;
+    margin-right: 5px;
+    padding-bottom: 2px;
+}
+
+
+.deleteButton, .updateStage-btn, .openTree-btn {
+
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #0095cd;
+}
+
+    .deleteButton:hover, .updateStage-btn:hover, .openTree-btn:hover {
+        background-color: #03729c;
+    }
+
+
+.paginationSection {
+    text-align: center;
+}
+
+.pagination {
+    padding-right: 0px;
+    margin-top: 30px;
+}
+
+    .pagination > .active > a {
+        background-color: #0095cd;
+    }
+
+span.time {
+    padding-right: 10px;
+}
+
+
+.switch {
+    position: relative;
+    width: 60px;
+    height: 25px;
+    border-radius: 50px;
+    background-color: #cccccc;
+    padding: 2px;
+    cursor: pointer;
+}
+
+    .switch.active {
+        background-color: #a3cf16;
+    }
+
+    .switch span {
+        position: absolute;
+        font-size: 12px;
+        font-weight: 500;
+        pointer-events: none;
+        color: #fff;
+    }
+
+    .switch .on {
+        left: 11px;
+        top: 4px;
+    }
+
+    .switch .off {
+        opacity: 0;
+        right: 10px;
+        top: 4px;
+    }
+
+.circle {
+    width: 21px;
+    height: 21px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.move-circle-right {
+    animation: 0.5s moveCircleRight cubic-bezier(0.87, -0.41, 0.19, 1.44) forwards;
+    transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+}
+
+.move-circle-left {
+    animation: 0.5s moveCircleLeft cubic-bezier(0.87, 0.41, 0.19, 1.44) forwards;
+    transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+}
+
+@keyframes moveCircleRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-165%);
+    }
+}
+
+@keyframes moveCircleLeft {
+    0% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.user-formContainer {
+    padding: 20px 0px 80px 0px;
+}
+
+.managmentButtons {
+    background-color: #fff;
+    padding: 50px 15px;
+    margin-bottom: -40px;
+}
+
+.saveButton2 {
+    width: 103px;
+}
+
+.managmentButtons button {
+    float: left;
+    margin-left: 15px;
+}
+
+.loginBackground {
+    background-color: #333333;
+}
+
+main.loginMain {
+    background-color: #fff;
+    max-width: 340px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 380px;
+}
+
+.loginMain h2 {
+    font-size: 18px;
+    padding-right: 30px;
+}
+
+.login-detils {
+    padding: 25px;
+}
+
+.user-loginContainer h4 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.login-detils input[type="text"] {
+    width: 230px;
+    margin-bottom: 10px;
+}
+
+.login-detils input[type="password"] {
+    width: 230px;
+    margin-bottom: 20px;
+}
+
+.user-loginContainer button {
+    float: left;
+    width: 80px;
+}
+
+.user-loginContainer {
+    width: 231px;
+    margin: auto;
+}
+
+.positionsList {
+    padding: 0px 5px;
+    height: 37px;
+    width: 99.5%;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    
+    background-position: left 17px top 17px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.formStyle input[type="search"] {
+    height: 33px;
+}
+
+.tableStyle2 {
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+}
+
+    .tableStyle2 tr {
+        border-bottom: 1px solid #fff;
+    }
+
+        .tableStyle2 tr:nth-child(odd) {
+            background-color: #deeff6;
+        }
+
+        .tableStyle2 tr:nth-child(even) {
+            background-color: transparent;
+        }
+
+    .tableStyle2 thead tr {
+        background-color: transparent !important;
+    }
+
+    .tableStyle2 thead th {
+        text-align: right;
+        color: #0095cd;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 55px 10px 10px;
+    }
+
+    .tableStyle2 tbody td {
+        text-align: right;
+        color: #444d58;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 55px 8px 10px;
+    }
+
+.tableStyle1 tbody tr.collepseTR {
+    background-color: #eaf4f9;
+    border-right: 3px solid #0095cd;
+}
+
+    .tableStyle1 tbody tr.collepseTR td.collepseTR-inner {
+        padding: 30px 40px;
+    }
+
+.styled-checkbox {
+    position: absolute;
+    opacity: 0;
+}
+
+    .styled-checkbox + label {
+        position: relative;
+        cursor: pointer;
+        padding: 0px;
+        margin-bottom: 0px;
+        border: 1px solid #0095cd;
+        border-radius: 2px;
+        width: 22px;
+    }
+
+        .styled-checkbox + label:before {
+            content: '';
+            display: inline-block;
+            vertical-align: text-top;
+            width: 20px;
+            height: 20px;
+            background: white;
+        }
+
+    .styled-checkbox:hover + label:before {
+        background: #0095cd;
+    }
+
+    .styled-checkbox:focus + label:before {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .styled-checkbox:checked + label:before {
+        background: #0095cd;
+    }
+
+    .styled-checkbox:disabled + label {
+        color: #b8b8b8;
+        cursor: auto;
+    }
+
+        .styled-checkbox:disabled + label:before {
+            box-shadow: none;
+            background: #ddd;
+        }
+
+    .styled-checkbox:checked + label:after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 9px;
+        background: white;
+        width: 2px;
+        height: 2px;
+        box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+tr#shabetzCollapse-row .formStyle {
+    padding-bottom: 30px;
+}
+
+td.collepseTR-inner .saveButton {
+    float: left;
+    margin: 15px;
+}
+
+.candidate-formContainer {
+    padding: 0px;
+}
+
+    .candidate-formContainer .row {
+        padding-bottom: 30px;
+    }
+
+.continuBtn {
+    margin-top: 20px;
+}
+
+.tableStyle3 {
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+    .tableStyle3 tr {
+        border-bottom: 1px solid #f7f7f7;
+    }
+
+    .tableStyle3 thead th {
+        text-align: right;
+        color: #0095cd;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 8px;
+    }
+
+    .tableStyle3 tbody td {
+        text-align: right;
+        color: #444d58;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px;
+    }
+
+th.removeSmall {
+    width: 40px;
+}
+
+.blueDot-botder {
+    border-top: 1px dotted #0095cd;
+}
+
+.actionButtons button {
+    float: left;
+    margin-right: 15px;
+}
+
+.buttonStyle-none {
+    border: none;
+    background-color: transparent;
+    color: #0095cd;
+}
+
+    .buttonStyle-none:hover {
+        color: #000;
+    }
+
+.actionButtons .clearButton {
+    margin-top: 7px;
+    border-bottom: 1px solid #0095cd;
+    padding: 0px 2px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.filupp > input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.filupp {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    display: block;
+    padding: 0px 15px 0px 5px;
+    font-size: 14px;
+    line-height: 41px;
+    height: 43px;
+    color: #0095cd;
+    cursor: pointer;
+    margin-bottom: 40px;
+    width: 241px;
+}
+
+    .filupp:before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 50px;
+        background-color: #0095cd;
+        height: 43px;
+        border-top: 0;
+        text-align: center;
+    }
+
+.filupp-file-name {
+    width: 75%;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.filupp .fa-upload {
+    color: #fff;
+    position: absolute;
+    left: 13px;
+    top: 9px;
+    font-size: 24px;
+}
+
+.filupp:hover::before {
+    background-color: #03729c;
+}
+
+.fileUpload {
+    padding-top: 30px;
+}
+
+.fileItem-list .row {
+    border-right: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    background-color: #fff;
+    padding: 11px 0px;
+}
+
+    .fileItem-list .row:first-child {
+        border-top: 1px solid #cccccc;
+    }
+
+td.collepseTR-inner .actionsButtons-container .saveButton {
+    margin-left: 0px;
+}
+
+.stageSekect-container.row {
+    padding-bottom: 20px;
+}
+
+.fileRemove {
+    text-align: left;
+    color: #0095cd;
+}
+
+.removeCandidate .switch {
+    float: left;
+}
+
+label.rc-lable {
+    float: right;
+    padding-top: 3px;
+}
+
+.removeCandidate {
+    width: 155px;
+    float: left;
+    margin: 20px 0px 0px 10px;
+}
+
+.tableStyle2 tbody tr.collepseTR td.collepseTR-inner {
+    background-color: #deeff6;
+}
+
+.closed {
+    display: none;
+}
+
+.open {
+}
+
+.menu-hide {
+    display: none !important;
+}
+
+.editButton.activeBtn, .editButtonLink.activeBtn {
+    background-color: #0095cd;
+}
+
+    .editButton.activeBtn > i.fa.fa-chevron-down, .editButtonLink.activeBtn > i.fa.fa-chevron-down {
+        transform: rotate(180deg);
+    }
+
+.updateStage-btn.activeBtn {
+    background-color: #cccccc;
+}
+
+    .updateStage-btn.activeBtn > i.fa.fa-refresh {
+        transform: rotate(90deg);
+    }
+
+tr.boxOpend {
+    background-color: #deeff6 !important;
+    border-right: 3px solid #0095cd;
+}
+
+.ContactMobile {
+    display: block;
+    width: 130px;
+}
+
+.removedCandidate {
+    background-color: #ff5050;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.positionNumber {
+    display: block;
+}
+
+
+.updateStage2-btn {
+    border: none;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #0095cd;
+}
+
+    .updateStage2-btn:hover {
+        background-color: #03729c;
+    }
+
+    .updateStage2-btn.activeBtn {
+        background-color: #cccccc;
+    }
+
+.dropdown-menu > li > a {
+    text-align: right;
+    padding: 10px;
+    border-bottom: 1px solid #0095cd;
+    min-width: 220px;
+}
+
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+    background-color: #dcf5ff;
+    border-bottom: 3px solid #0095cd;
+}
+
+.nav > li > a:focus {
+    outline: none;
+}
+
+.dropdown-menu {
+    min-width: 230px;
+    padding: 0px;
+}
+
+ul.tree-level1 {
+    background-color: #eff3f6;
+    padding: 0px 15px 15px 15px;
+    list-style: none;
+}
+
+
+ul.tree-level2 {
+    background-color: #e0e3e4;
+    padding: 0px 30px 15px 10px;
+    list-style: none;
+}
+
+ul.tree-level3 {
+    background-color: #d8d9d9;
+    padding: 0px 15px 15px 10px;
+    list-style: none;
+}
+
+ul.tree-level4 {
+    background-color: #cfcfcf;
+    padding: 0px 15px 15px 10px;
+    list-style: none;
+}
+
+ul.tree-level1 li a {
+    display: block;
+    border-bottom: 4px solid #d9d9d9;
+    padding: 8px 40px 8px 5px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4e545c;
+}
+
+ul.tree-level1 ul.tree-level2 li a {
+    border-bottom: 3px solid #b0b0b0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+ul.tree-level1 ul.tree-level2 ul.tree-level3 li a {
+    border-bottom: 2px solid #cacaca;
+    padding-top: 7px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+ul.tree-level1 ul.tree-level2 ul.tree-level3 ul.tree-level4 li a {
+    border-bottom: 2px solid #bfbfbf;
+    padding-top: 7px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+button.openTree-btn {
+    float: right;
+    margin-top: -38px;
+    margin-left: 5px;
+}
+
+.stage-formContainer {
+    padding: 50px 0px 10px 0px;
+}
+
+.addStage-button {
+    margin-top: 20px;
+}
+
+.stageReplace-up.buttonStyle3.first-child {
+    display: none;
+}
+
+.stageReplace-down.buttonStyle3.last-child {
+    display: none;
+}
+
+.stage-formContainer {
+    padding: 20px 0px 10px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+.stageReplace-up {
+    margin-left: 5px;
+}
+
+.buttonHeight-Fix button {
+    margin-top: 20px;
+    float: left;
+    margin-right: 15px;
+}
+
+.addQuiz-sections .container {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.addQuizBtn {
+    margin-top: 123px;
+}
+
+.jobDetail-section .container, .addMenu-section .container {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.jovChekFloat-fix label {
+    float: right;
+    margin-left: 5px;
+}
+
+.addMenuBtn {
+    margin-top: 20px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+
+/* fix bootstrap for RTL support */
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.disable-btn{
+    opacity:0.5;
+}
+
+/* tree drop down style start*/
+
+.tree-dropdown {
+    position: relative;
+    display: block;
+    font-size: 13px;
+    width: 300px;
+}
+
+    .tree-dropdown .select {
+        padding: 0 10px;
+        height: 32px;
+        display: block;
+        line-height: 14px;
+        color: #333333;
+        vertical-align: middle;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    }
+
+        .tree-dropdown .select::after {
+            content: " ";
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #CDCDCD;
+            position: absolute;
+            left: 10px;
+            top: 13px;
+        }
+
+    .tree-dropdown p {
+        line-height: 32px;
+        margin: 0;
+    }
+
+    .tree-dropdown .list {
+        box-sizing: content-box;
+        position: absolute;
+        top: 33px;
+        left: 0px;
+        right: 0px;
+        background-color: #FFF;
+        border-style: solid;
+        border-color: #cccccc;
+        border-width: 1px 1px 1px 1px;
+        z-index: 1100;
+        overflow-x: hidden;
+        max-height: 300px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .tree-dropdown ul {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+    }
+
+        .tree-dropdown ul:first-child {
+            padding: 0px;
+        }
+
+    .tree-dropdown .list p:hover {
+        background: #eee;
+    }
+
+    .tree-dropdown .list p.selected {
+        background: #DDDBFF;
+    }
+
+    .tree-dropdown .level-0 {
+        padding-right: 15px
+    }
+
+    .tree-dropdown .level-1 {
+        padding-right: 30px
+    }
+
+    .tree-dropdown .level-2 {
+        padding-right: 45px
+    }
+
+    .tree-dropdown .level-3 {
+        padding-right: 60px
+    }
+
+    .tree-dropdown .level-4 {
+        padding-right: 75px
+    }
+
+    .tree-dropdown .level-5 {
+        padding-right: 90px
+    }
+
+    .tree-dropdown .level-6 {
+        padding-right: 105px
+    }
+
+    .tree-dropdown .level-7 {
+        padding-right: 120px
+    }
+
+    .tree-dropdown .level-8 {
+        padding-right: 135px
+    }
+
+    .tree-dropdown .level-9 {
+        padding-right: 150px
+    }
+
+    .tree-dropdown .level-10 {
+        padding-right: 110px
+    }
+
+/* tree drop down style end*/
+
+
+
+@media (min-width: 992px) {
+    .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+        float: right;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
+        float: right;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .navbar-nav > li {
+        float: right;
+    }
+}
+
+
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+
+html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+    margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block; /* 1 */
+    vertical-align: baseline; /* 2 */
+}
+
+    /**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+    audio:not([controls]) {
+        display: none;
+        height: 0;
+    }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+    display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+    background-color: transparent;
+}
+
+    /**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+
+    a:active,
+    a:hover {
+        outline: 0;
+    }
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+    font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+    font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+    font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+    border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+    margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+    overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+    overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+    /**
+ * Re-set default cursor for disabled elements.
+ */
+
+    button[disabled],
+    html input[disabled] {
+        cursor: default;
+    }
+
+    /**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+    button::-moz-focus-inner,
+    input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+    line-height: normal;
+}
+
+    /**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        box-sizing: border-box; /* 1 */
+        padding: 0; /* 2 */
+    }
+
+    /**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        height: auto;
+    }
+
+    /**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+
+    input[type="search"] {
+        -webkit-appearance: textfield; /* 1 */
+        box-sizing: content-box; /* 2 */
+    }
+
+        /**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+    overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+    font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+        a[href]:after {
+            content: " (" attr(href) ")";
+        }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 960px) {
+}
+
+@media (max-width: 768px) {
+
+    .headerStyle {
+        padding: 15px;
+    }
+
+    .loginName {
+        float: none;
+        text-align: right;
+        border-bottom: 1px solid #ececec;
+        padding: 15px;
+    }
+
+    .bradcrumbs {
+        padding: 15px;
+    }
+
+    .tableStyle1 thead th, .tableStyle1 tbody td {
+        padding: 15px;
+    }
+
+    .mainNavigation .container {
+        padding: 0px 15px;
+    }
+
+    .addQuizBtn {
+        margin-top: 15px;
+    }
+
+    .loginSite {
+        float: left;
+    }
+}
+
+@media (max-width: 480px) {
+
+    a.logo {
+        float: none;
+        margin: auto;
+        text-align: center;
+    }
+
+    .logoPlace h1 {
+        font-size: 24px;
+        text-align: center;
+        float: none;
+    }
+
+    .loginName {
+        padding-right: 60px;
+    }
+
+    nav.navbar {
+        position: absolute;
+    }
+
+    button.navbar-toggle {
+        margin-right: 0px;
+        margin-top: 10px;
+    }
+
+    ul.nav > li:first-child {
+        padding-right: 15px;
+    }
+
+    .navbar-collapse {
+        background-color: #e8e8e8;
+        border-bottom: 1px solid #000;
+        width: 100%;
+        position: relative;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        z-index: 100;
+    }
+
+    /* responsive table */
+
+    .tableStyle1 th, .tableStyle3 th {
+        display: none;
+    }
+
+    .tableStyle1 tbody td, .tableStyle3 tbody td {
+        display: flex;
+        width: inherit;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+        .tableStyle1 tbody td:before, .tableStyle3 tbody td:before {
+            content: attr(data-th) ": ";
+            display: inline-block;
+            font-weight: 600;
+            color: #0095cd;
+            width: 135px;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+        .tableStyle3 tbody td:last-child, .tableStyle3 tbody td:first-child {
+            padding-bottom: 15px;
+        }
+
+    .actionButtons button {
+        margin-right: 10px;
+    }
+
+    td.btnContainer, th.btnContainer {
+        padding-right: 15px !important;
+    }
+
+    .newUser-inner {
+        float: none;
+        padding-top: 20px;
+    }
+
+    span.time {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    .managmentButtons button {
+        float: none;
+    }
+
+    ul.nav a {
+        border-bottom: 1px solid #ccc;
+        padding-right: 10px;
+    }
+
+    td.collepseTR-inner::before {
+        display: none !important;
+    }
+
+    .tableStyle1 tbody tr.collepseTR td.collepseTR-inner {
+        padding: 15px 0px;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > a {
+        background-color: #fff;
+        padding: 10px 20px 10px 10px;
+    }
+
+    .searcButton, .addMenuBtn {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    main.loginMain {
+        max-width: 300px;
+    }
+}
+
+
+.block-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.4;
+    filter: Alpha(Opacity=40);
+    z-index: 3000;
+}
+
+.loading {
+    opacity: 1;
+    transition: opacity .8s ease-in-out;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: -1;
+}
+
+body:empty + .loading {
+    opacity: 1;
+    z-index: 100;
+}
+
+    body:empty + .loading h1 {
+        color: #EEE;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translate(0, -50%);
+    }
+
+.error-list {
+    list-style-type: none;
+    padding-right: 0;
+}
+
+.block-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+  filter: Alpha(Opacity=40);
+  z-index: 3000;
+}
+
+/* Standard Size */
+.ui.loader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0px;
+  z-index: 1000;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ui.dimmer .loader {
+  display: block;
+}
+
+.ui.loader.active,
+.ui.loader.visible {
+  display: block;
+}
+
+.ui.loader.disabled,
+.ui.loader.hidden {
+  display: none;
+}
+
+.ui.loader {
+  width: 100px;
+  height: 32px;
+  background: url(../images/loader-medium.gif) no-repeat;
+  background-position: 48% 0px;
+}

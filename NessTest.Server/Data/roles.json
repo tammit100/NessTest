@@ -1,0 +1,30 @@
+[
+  {
+    "code": 1,
+    "description": "בודק/ת QA"
+  },
+  {
+    "code": 2,
+    "description": "מפתח Fullstack"
+  },
+  {
+    "code": 3,
+    "description": "מנהל מוצר"
+  },
+  {
+    "code": 4,
+    "description": "מעצבת UI/UX"
+  },
+  {
+    "code": 5,
+    "description": "מפתח Backend"
+  },
+  {
+    "code": 6,
+    "description": "ראש צוות"
+  },
+  {
+    "code": 7,
+    "description": "מפתח Frontend"
+  }
+]

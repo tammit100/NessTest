@@ -1,0 +1,199 @@
+<div>
+    <section class="bradcrumbs row bgColorStyle2">
+        <ul class="centerWidth">
+            <li>
+                <a href="#" class="pathway"><span>משתמשים</span></a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <span>ניהול משתמשים</span>
+            </li>
+        </ul>
+    </section>
+    <section class="managment row bgColorStyle2">
+        <div class="container">
+            <div class="col-md-12"><h2 class="headdingColor1">ניהול משתמשים</h2></div>
+            <div class="formContainer col-md-6 col-sm-10 col-xs-12">
+                <form #f="ngForm" class="formStyle searchForm">
+                    <fieldset>
+                        <div class="col-md-4">
+                            <label for="userName">שם משתמש</label>
+                            <input id="userName" type="text" [(ngModel)]="filterName" name="filterName" (input)="onSearch()">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="positionName">תפקיד</label>
+                            <select id="positionName" [(ngModel)]="filterPosition" name="filterPosition" (change)="onSearch()" class="form-control">
+                                <option value="">הכל</option> <!-- אפשרות להצגת כל המשתמשים -->
+                                <option *ngFor="let role of roles" [value]="role.code">
+                                    {{ role.description }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="searcButton buttonStyle" (click)="onSearch()">חיפוש</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- <div class="newUser-Container col-md-6 col-sm-2 col-xs-12">
+                <div class="newUser-inner">
+                    <button id="AddUser" class="add-newUser bgColorStyle3"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <span>הוספת משתמש חדש</span>
+                </div>
+            </div> -->
+            <div class="newUser-inner">
+                <button id="AddUser" class="add-newUser bgColorStyle3" (click)="prepareNewUser()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <span>הוספת משתמש חדש</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="mainSection" class="MainContainer centerWidth">
+          <div class="modalTable-inner boederBg" >
+            <table class="tableStyle1" title="טבלת משתמשים" id="UserTable">
+                <thead>
+                    <tr>
+                        <th>מספר זהות<button class="sortTableBy" title="מיין עמודת מספר זהות"><i class="fa fa-sort-desc" aria-hidden="true"></i></button></th>
+                        <th>שם משתמש</th>
+                        <th>תפקיד</th>
+                        <th>טלפון</th>
+                        <th>דואל</th>
+                        <th>תאריך יצירה</th>
+                        <th class="btnContainer">פעיל</th>
+                        <th class="btnContainer">עדכון</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="isNewUser" class="new-user-row" style="background-color: #f9f9f9; border-bottom: 2px solid #5cb85c;">
+                        <td data-th="מספר זהות">
+                            <input type="text" [(ngModel)]="searchId" name="newId" class="form-control" placeholder="ת.ז.">
+                        </td>
+                        <td data-th="שם משתמש">
+                            <input type="text" [(ngModel)]="editName" name="newName" class="form-control" placeholder="שם מלא">
+                        </td>
+                        <td data-th="תפקיד">
+                            <select [(ngModel)]="editPosition" name="newPos" class="form-control">
+                                <option [ngValue]="null" disabled>בחר...</option>
+                                <option *ngFor="let role of roles" [ngValue]="role.code">{{ role.description }}</option>
+                            </select>
+                        </td>
+                        <td data-th="טלפון">
+                            <input type="text" [(ngModel)]="editPhone" name="newPhone" class="form-control" placeholder="05X-XXXXXXX">
+                        </td>
+                        <td data-th="דואל">
+                            <input type="email" [(ngModel)]="editEmail" name="newEmail" class="form-control" placeholder="email@example.com">
+                        </td>
+                        <td data-th="תאריך יצירה">חדש</td>
+                        <td data-th="פעיל" class="btnContainer">
+                            <input type="checkbox" [(ngModel)]="editIsActive" name="newActive">
+                        </td>
+                        <td data-th="פעולות" class="btnContainer">
+                            <button type="button" (click)="saveNewUser()" [disabled]="isFormInvalid() || !searchId" style="color: green; border: none; background: none; font-size: 1.2em;">
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <button type="button" (click)="isNewUser = false; cancelEdit()" style="color: red; border: none; background: none; font-size: 1.2em; margin-right: 5px;">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let user of filteredUsers">
+                        <td data-th="מספר זהות">{{ user.id }}</td>
+
+                        <!-- שם משתמש -->
+                        <td data-th="שם משתמש">
+                            <span *ngIf="selectedUser?.id !== user.id">{{ user.name }}</span>
+                            <input *ngIf="selectedUser?.id === user.id" type="text" [(ngModel)]="editName" name="editName" class="form-control">
+                        </td>
+
+                        <!-- תפקיד -->
+                        <td data-th="תפקיד">
+                            <!-- מצב תצוגה: קריאה לפונקציית התרגום -->
+                            <span *ngIf="selectedUser?.id !== user.id">
+                                {{ getRoleName(user.position) }}
+                            </span>
+
+                            <!-- מצב עריכה: Combo Box שמקושר ל-Code -->
+                            <select *ngIf="selectedUser?.id === user.id" 
+                                    [(ngModel)]="editPosition" 
+                                    name="editPosition" 
+                                    class="form-control">
+                                <option [value]="null" disabled>בחר תפקיד...</option>
+                                <option *ngFor="let role of roles" [ngValue]="role.code">
+                                    {{ role.description }}
+                                </option>
+                            </select>
+                        </td>
+                        <td data-th="טלפון">
+                            <!-- מצב תצוגה -->
+                            <span *ngIf="selectedUser?.id !== user.id">{{ user.phone }}</span>
+
+                            <!-- מצב עריכה עם ולידציה -->
+                            <div *ngIf="selectedUser?.id === user.id">
+                                <input type="text" 
+                                    [(ngModel)]="editPhone" 
+                                    name="editPhone" 
+                                    required 
+                                    pattern="^05\d-?\d{7}$" 
+                                    #phoneModel="ngModel" 
+                                    class="form-control"
+                                    [class.input-error]="phoneModel.invalid && phoneModel.touched">
+                                
+                                <!-- הודעת שגיאה קטנה מתחת ל-input בתוך התא -->
+                                <div *ngIf="phoneModel.invalid && phoneModel.touched" class="error-text">
+                                    <small *ngIf="phoneModel.errors?.['required']">חובה</small>
+                                    <small *ngIf="phoneModel.errors?.['pattern']">לא תקין</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="דואל">
+                            <span *ngIf="selectedUser?.id !== user.id">{{ user.email }}</span>
+                            <div *ngIf="selectedUser?.id === user.id">
+                                <input id="userEmail" type="email" [(ngModel)]="editEmail"  name="editEmail" 
+                                    required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #emailModel="ngModel" class="form-control">
+                                
+                                <!-- הצגת הודעת שגיאה אם האימייל לא תקין והמשתמש נגע בשדה -->
+                                <div *ngIf="emailModel.errors?.['pattern'] && emailModel.touched" class="text-danger small">
+                                כתובת אימייל לא תקינה
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="תאריך יצירה">
+                            <span class="date">{{ user.createdDate | date:'dd/MM/yyyy' }}</span>
+                        </td>
+
+                        <!-- עמודת פעיל - כעת עם אפשרות עריכה -->
+                        <td data-th="פעיל" class="btnContainer">
+                            <span *ngIf="selectedUser?.id !== user.id">{{ user.isActive ? 'כן' : 'לא' }}</span>
+                            <input *ngIf="selectedUser?.id === user.id" type="checkbox" [(ngModel)]="editIsActive" name="editActive">
+                        </td>
+
+                        <!-- עמודת פעולות -->
+                        <td data-th="עדכון" class="btnContainer">
+                            <button *ngIf="selectedUser?.id !== user.id" type="button" class="editButton" (click)="editUser(user)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+
+                            <div *ngIf="selectedUser?.id === user.id" class="edit-actions">
+                                <!-- בכפתור השמירה (בתוך הטבלה או בטופס) -->
+                                <button type="button" 
+                                        (click)="saveChanges()" 
+                                        [disabled]="isFormInvalid()"
+                                        [style.opacity]="isFormInvalid() ? 0.5 : 1"
+                                        title="שמור">
+                                    <i class="fa fa-check"></i>
+                                </button>
+
+                                <button type="button" (click)="cancelEdit()" style="color: red; border: none; background: none; font-size: 1.2em; margin-right: 5px;">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</div>

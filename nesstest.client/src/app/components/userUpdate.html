@@ -1,0 +1,69 @@
+﻿<script src="scripts/app/controllers/updateUserCtrl.js"></script>
+<div>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <section class="bradcrumbs row bgColorStyle2">
+        <ul class="centerWidth">
+            <li>
+                <a href="#" class="pathway"><span>משתמשים</span></a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#" class="pathway"><span>פרטי משתמש</span></a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <span>הוספת משתמש חדש</span>
+            </li>
+        </ul>
+    </section>
+    <section class="managment row bgColorStyle2">
+        <form class="formStyle addNew-detils">
+            <div class="container">
+                <div class="col-md-12"><h2 class="headdingColor1">פרטי משתמש</h2></div>
+                <div class="user-formContainer col-md-12">
+
+                    <fieldset>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="userName">שם משתמש *</label>
+                            <input id="userName" type="text">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="userID-IL">תעודת זהות *</label>
+                            <input id="userID-IL" type="text">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="userPhone">טלפון *</label>
+                            <input id="userPhone" type="text">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="userEmail">דוא"ל *</label>
+                            <input id="userEmail" type="text">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="positionName">תפקיד *</label>
+                            <select id="positionName" class="positionsList">
+                                <option value="" selected="">בחר מהרשימה</option>
+                              
+                            </select>
+                            
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="">פעיל</label>
+                            <input type="checkbox" />
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="managmentButtons row">
+                <div class="container">
+                    <button id="btnSave" class="saveButton2 buttonStyle2">שמירה</button>
+                    <button class="clearButton buttonStyle">אפס סיסמה</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+</div>

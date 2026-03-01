@@ -1,0 +1,74 @@
+﻿[
+  {
+    "id": "02345678",
+    "name": "נורית ברוש",
+    "position": 1,
+    "phone": "050-1234567",
+    "email": "nurit@example.com",
+    "createdDate": "2023-10-01T10:00:00",
+    "isActive": true
+  },
+  {
+    "id": "12345678",
+    "name": "ישראל ישראלי",
+    "position": 2,
+    "phone": "051-2345678",
+    "email": "israel@example.com",
+    "createdDate": "2024-02-20T12:30:00",
+    "isActive": true
+  },
+  {
+    "id": "312456789",
+    "name": "אבי כהן",
+    "position": 3,
+    "phone": "052-3456789",
+    "email": "avi@example.com",
+    "createdDate": "2024-03-18T12:30:00",
+    "isActive": true
+  },
+  {
+    "id": "054321678",
+    "name": "מיכל לוי",
+    "position": 4,
+    "phone": "053-4567890",
+    "email": "michal@example.com",
+    "createdDate": "2024-06-06T17:30:00",
+    "isActive": false
+  },
+  {
+    "id": "203456781",
+    "name": "דניאל מזרחי",
+    "position": 5,
+    "phone": "054-5678901",
+    "email": "daniel@example.com",
+    "createdDate": "2024-01-01T09:00:00",
+    "isActive": true
+  },
+  {
+    "id": "039876542",
+    "name": "רחל אברהם",
+    "position": 6,
+    "phone": "055-6789012",
+    "email": "rachel@example.com",
+    "createdDate": "2025-02-16T11:00:00",
+    "isActive": true
+  },
+  {
+    "id": "445566778",
+    "name": "יוסי לוין",
+    "position": 7,
+    "phone": "056-7890123",
+    "email": "yosi@example.com",
+    "createdDate": "2025-08-02T10:00:00",
+    "isActive": true
+  },
+  {
+    "id": "1234567",
+    "name": "עמית",
+    "position": 3,
+    "phone": "054-1234567",
+    "email": "amit@gmail.com",
+    "isActive": true,
+    "createdDate": "2026-02-28T21:30:03"
+  }
+]
