@@ -1,18 +1,15 @@
-import { Organizationlevels } from "./Organizationlevels.model";
-import { Role } from "./Role.model";
-
 export interface User {
     id: string;
-    organizationlevels: Organizationlevels; 
-    username: string;
-    role: Role;                           
+    organizationlevelsId: number; // שינוי מ-Number ל-number
+    roleId: number;              // שינוי מ-Number ל-number
+    username: string; 
     email: string;
     phone: string;
-    managerid: string;
-    password?: string;                      
-    salt?: string;
+    managerid: string;           // מומלץ m קטנה אם ה-Serializer מוגדר ל-CamelCase
+    password: string;            // מומלץ p קטנה
+    salt: string;                // מומלץ s קטנה
     isTemporaryPassword: boolean;
     isActive: boolean;
-    createdDate: Date | string;              
-    lastUpdateDate: Date | string;
+    createDate: string | Date;
+    lastUpdateDate: string | Date;
 }

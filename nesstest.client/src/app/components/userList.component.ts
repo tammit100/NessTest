@@ -19,6 +19,12 @@ import { Role } from '../Models/Role.model';
         display: block;
         margin-top: 2px;
     }
+    .text-danger.small {
+        display: block;
+        font-size: 11px;
+        margin-top: 4px;
+        white-space: nowrap; /* מונע מההודעה לרדת שורה בצורה מכוערת */
+    }
     .input-error {
         border: 1px solid #d9534f !important;
     }
@@ -30,7 +36,7 @@ export class UserListComponent implements OnInit {
   allUsers: User[] = [];   // רשימת המשתמשים המלאה מהשרת
   roles: Role[] = [];      // רשימת התפקידים המלאה מהשרת
   filteredUsers: any[] = []; // הרשימה שמוצגת בטבלה
-  selectedUser = {} as User;
+  selectedUser: User | null = null; 
 
   
 
@@ -73,11 +79,12 @@ export class UserListComponent implements OnInit {
       
       // חיפוש לפי תפקיד (קוד מספר)
       // אם לא נבחר תפקיד (searchPosition === ""), נחזיר true לכולם
-      const positionMatch = this.filterPosition === "" || user.role.code == this.filterPosition;
+      const positionMatch = this.filterPosition === "" || user.roleId == this.filterPosition;
 
       return nameMatch && positionMatch;
     });
   }
+
   getRoleName(roleCode: number): string {
     const role = this.roles.find(r => r.code === roleCode);
     return role ? role.description : 'לא הוגדר';
@@ -89,55 +96,61 @@ export class UserListComponent implements OnInit {
 
   // עריכה
   editUser(user: any) {
+
+    console.log('editUser')
     this.selectedUser = { ...user }; // עותק כדי לאפשר ביטול 
     // העתקת הנתונים למשתנה עריכה
     this.editName = user.username;
-    this.editPosition = user.role.code;
+    this.editPosition = user.roleId;
     this.editPhone = user.phone;
+    console.log('user.phone:' + user.phone);
+    console.log('this.editPhone:' + this.editPhone);
     this.editEmail = user.email;
     this.editIsActive = user.isActive;
   }
 
-  // שמירת השינויים
   saveChanges() {
+    console.log('saveChanges started');
 
-    console.log('saveCahnges');
-    console.log(this.selectedUser)
-    console.log(this.selectedUser.id); 
-    if (this.selectedUser) {
-        console.log(this.selectedUser.id); 
-        console.log(this.allUsers);
-        this.updatedData = this.allUsers.find(u => u.id.toString() === this.selectedUser.id.toString());
-        console.log('selectedUser');
-        console.log(this.selectedUser);
-        console.log('updatedData');
-        console.log(this.updatedData);
-        this.updatedData.id =  this.selectedUser.id;
-        this.updatedData.username = this.editName;
-        this.updatedData.phone = this.editPhone;
-        this.updatedData.email = this.editEmail;
-        this.updatedData.role = this.getRole(this.editPosition);
-        this.updatedData.isActive = this.editIsActive;
-        this.updatedData.createDate = this.selectedUser.createdDate; 
-      };
-      
-      console.log(this.updatedData);
-      this.userService.updateUser(this.updatedData).subscribe(() => {
-        // 1. עדכון הרשימה המלאה בזיכרון
-        const index = this.allUsers.findIndex(u => u.id === this.updatedData.id);
-        if (index !== -1) {
-          this.allUsers[index] = { ...this.updatedData };
+    if (!this.selectedUser || !this.selectedUser.id) return;
+
+    const userToUpdate = this.allUsers.find(u => u.id.toString() === this.selectedUser!.id.toString());
+    if (!userToUpdate) return;
+
+    // בניית אובייקט נקי שתואם בדיוק ל-Models.Users ב-C#
+    this.updatedData = {
+        id: userToUpdate.id,
+        username: this.editName,
+        phone: this.editPhone,
+        email: this.editEmail,
+        roleId: Number(this.editPosition),
+        organizationlevelsId: userToUpdate.organizationlevelsId || 2034,
+        isActive: this.editIsActive,
+        managerid: userToUpdate.managerid || "",
+        password: userToUpdate.password || "", // השרת עלול לדרוש מחרוזת לא null
+        salt: userToUpdate.salt || "",
+        isTemporaryPassword: !!userToUpdate.isTemporaryPassword,
+        // וודא שהתאריך הוא בפורמט ISO תקין או null
+        createDate: userToUpdate.createDate ? new Date(userToUpdate.createDate).toISOString() : new Date().toISOString(),
+        lastUpdateDate: new Date().toISOString()
+    };
+
+    this.userService.updateUser(this.updatedData).subscribe({
+        next: (response) => {
+            console.log('Update successful', response);
+            const index = this.allUsers.findIndex(u => u.id === response.id);
+            if (index !== -1) {
+                this.allUsers[index] = response;
+            }
+            this.selectedUser = null; // סגירת מצב עריכה
+            this.onSearch();
+        },
+        error: (err) => {
+            console.error('Update failed', err);
+            // אם עדיין יש 400, בדוק בלשונית Network -> Response מה השדה הבעייתי
         }
-
-        // 2. איפוס שדות החיפוש כדי שהסינון הבא יציג את כולם
-        this.filterName = '';
-        this.filterPosition = '';
-        this.selectedUser = {} as User;
-
-        // 3. הרצת הסינון מחדש 
-        this.onSearch();
-      });
-    }
+    });
+  } 
     
   cancelEdit() {
     this.selectedUser = {} as User;
@@ -157,41 +170,58 @@ export class UserListComponent implements OnInit {
   }
 
   saveNewUser() {
-    const newUser : User = {
-      id: this.searchId,
-      username: this.editName,
-      role: this.getRole(this.editPosition)!,
-      phone: this.editPhone,
-      email: this.editEmail,
-      isActive: true,
-      organizationlevels: null as any,
-      managerid: '',
-      isTemporaryPassword: false,
-      createdDate: '',
-      lastUpdateDate: ''
+    // בניית אובייקט משתמש חדש תקין
+    const newUser: User = {
+        id: this.searchId, // ה-ID שהוקלד בתיבת החיפוש/הוספה
+        organizationlevelsId: 2034, // ID ברירת מחדל קיים ב-DB
+        roleId: Number(this.editPosition), // המרה למספר
+        username: this.editName,
+        phone: this.editPhone,
+        email: this.editEmail,
+        managerid: "", // שדה חובה ב-C# בדרך כלל
+        password: "TempPassword123", // סיסמה ראשונית (או מה שהגדרת בשרת)
+        salt: "DefaultSalt", 
+        isTemporaryPassword: true,
+        isActive: true,
+        // שימוש בפורמט ISO שהשרת אוהב
+        createDate: new Date().toISOString(),
+        lastUpdateDate: new Date().toISOString()
     };
 
-    this.userService.addUser(newUser).subscribe(res => {
-      this.allUsers.push(res);
-      this.onSearch();
-      this.isNewUser = false;
-      this.cancelEdit();
-      this.searchId = '';
+    console.log('Sending new user to server:', newUser);
+
+    this.userService.addUser(newUser).subscribe({
+        next: (res) => {
+            console.log('User added successfully:', res);
+            
+            // הוספה למערך המקומי ועדכון התצוגה
+            this.allUsers.push(res);
+            this.onSearch();
+            
+            // איפוס המצב
+            this.isNewUser = false;
+            this.cancelEdit();
+            this.searchId = '';
+        },
+        error: (err) => {
+            console.error('Add user failed. Check Network -> Response for details.', err);
+        }
     });
   }
 
-  
-  
   isFormInvalid(): boolean {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // Regex גמיש יותר שתואם ל-HTML
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const phoneRegex = /^05\d-?\d{7}$/;
 
-    // אם אנחנו במצב עריכה, נבדוק את השדות
-    const isEmailValid = emailRegex.test(this.editEmail);
-    const isPhoneValid = phoneRegex.test(this.editPhone);
-    const isNameValid = this.editName && this.editName.length > 1;
+    // בדיקה שקיימים ערכים לפני ה-Test (למניעת קריסה על null)
+    const isEmailValid = this.editEmail ? emailRegex.test(this.editEmail) : false;
+    const isPhoneValid = this.editPhone ? phoneRegex.test(this.editPhone) : false;
+    const isNameValid = this.editName && this.editName.trim().length > 1;
 
-    return !isEmailValid || !isPhoneValid || !isNameValid;
-  }
+    // מחזיר true אם אחד מהם לא תקין -> הכפתור יהיה disabled
+    return !(isEmailValid && isPhoneValid && isNameValid);
+  } 
+
 }
 

@@ -9,7 +9,12 @@ namespace Services.mapping
     {
         public EntityToModel()
         {
-            CreateMap<Entities.Dbo.Users, Models.Users>().ReverseMap();
+            CreateMap<Entities.Dbo.Users, Models.Users>()
+            // אומרים לאוטומאפר: קח את הערך מ-src.Role.Code ושים אותו ב-dest.RoleId
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.Role.Code))
+                // אותו דבר עבור Organizationlevels אם צריך
+                .ForMember(dest => dest.OrganizationlevelsId, opt => opt.MapFrom(src => src.Organizationlevels.Id))
+                .ReverseMap();
 
             CreateMap<Entities.Lookup.Role, Models.RoleDto>().ReverseMap();
 
