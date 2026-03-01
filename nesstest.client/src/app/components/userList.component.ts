@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     .input-error {
         border: 1px solid #d9534f !important;
     }
-    /* עיצוב כדי שהתא בטבלה לא יקפוץ בגובה כשמופיעה שגיאה */
+    
     td { vertical-align: top; }
   `]
 })
@@ -40,12 +40,7 @@ export class UserListComponent implements OnInit {
   editEmail: string = '';
   editIsActive: boolean = true;
 
-  // // שדות החיפוש
-  // searchName: string = '';
-  // searchPosition: string = '';
-  // searchPhone: string = '';
-  // searchEmail: string = ''; 
-  // searchIsActive: boolean = true;
+
 
   isNewUser: boolean = false;
   searchId: string = '';  
@@ -82,10 +77,10 @@ export class UserListComponent implements OnInit {
     return role ? role.description : 'לא הוגדר';
   }
 
-  // בלחיצה על כפתור העריכה בטבלה
+  // עריכה
   editUser(user: any) {
-    this.selectedUser = { ...user }; // יוצרים עותק כדי לא לשנות את המקור לפני השמירה
-    // נטען את הנתונים לשדות החיפוש כדי שיהיה אפשר לערוך אותם
+    this.selectedUser = { ...user }; // עותק כדי לאפשר ביטול 
+    // העתקת הנתונים למשתנה עריכה
     this.editName = user.name;
     this.editPosition = user.position;
     this.editPhone = user.phone;

@@ -12,19 +12,22 @@ export class UserService {
   selectedUser: any = null;                   
 
   constructor(private http: HttpClient) {}
-
+  // משתמשים
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>('Users');
   }
 
+  // עדכון
   updateUser(user: any): Observable<any> {
     return this.http.put('Users/' + user.id, user);
   }
   
+  // תפקידים
   getRoles(): Observable<any[]> {
     return this.http.get<any[]>('Roles');
   }
 
+  // הוספת משתמש
   addUser(user: any): Observable<any> {
     return this.http.post('Users', user);
   }
