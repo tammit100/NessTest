@@ -35,11 +35,12 @@ import { Role } from '../Models/Role.model';
 export class UserListComponent implements OnInit {
   allUsers: User[] = [];   // רשימת המשתמשים המלאה מהשרת
   roles: Role[] = [];      // רשימת התפקידים המלאה מהשרת
-  filteredUsers: any[] = []; // הרשימה שמוצגת בטבלה
-  selectedUser: User | null = null; 
+  filteredUsers: any[] = []; // הרשימה המפולטרת שמוצגת בטבלה
+  selectedUser: User | null = null; // המשתמש הנבחר לעריכה
+
 
   
-
+  // משתנים לסינון
   filterName: string = '';
   filterPosition: any = '';
 
@@ -51,21 +52,23 @@ export class UserListComponent implements OnInit {
   editIsActive: boolean = true;
 
 
-
-  isNewUser: boolean = false;
-  searchId: string = '';  
+  
+  isNewUser: boolean = false; // האם משתמש חדש
+  searchId: string = '';  // id של המשתמש הנוכחי
   updatedData: any;
 
   constructor(private userService: UserService) {}
 
+  // initialization - טעינת נתונים מהשרת (משתמשים ותפקידים)
   ngOnInit() {
+    // טעינת משתמשים
     this.userService.getUsers().subscribe((data: User[]) => {
       this.allUsers = data;
       console.log(this.allUsers);
       this.filteredUsers = data; // תצוגה מלאה
     });
 
-    // טעינת תפקידים ל-Combo Box
+    // טעינת תפקידים
     this.userService.getRoles().subscribe((data: Role[]) => {
       this.roles = data;
     });
@@ -78,18 +81,20 @@ export class UserListComponent implements OnInit {
       const nameMatch = user.username.toLowerCase().includes(this.filterName.toLowerCase());
       
       // חיפוש לפי תפקיד (קוד מספר)
-      // אם לא נבחר תפקיד (searchPosition === ""), נחזיר true לכולם
+      // אם לא נבחר תפקיד נחזיר את הכל
       const positionMatch = this.filterPosition === "" || user.roleId == this.filterPosition;
 
       return nameMatch && positionMatch;
     });
   }
 
+  // הצגת תיאור  (description) לפי הקוד
   getRoleName(roleCode: number): string {
     const role = this.roles.find(r => r.code === roleCode);
     return role ? role.description : 'לא הוגדר';
   }
 
+  // החזרת האובייקט Role (לפי הקוד)
   getRole(roleCode: number): Role | undefined {
       return this.roles.find(r => r.code === roleCode);
   }
@@ -117,7 +122,7 @@ export class UserListComponent implements OnInit {
     const userToUpdate = this.allUsers.find(u => u.id.toString() === this.selectedUser!.id.toString());
     if (!userToUpdate) return;
 
-    // בניית אובייקט נקי שתואם בדיוק ל-Models.Users ב-C#
+    // בניית אובייקט נקי 
     this.updatedData = {
         id: userToUpdate.id,
         username: this.editName,
@@ -127,10 +132,9 @@ export class UserListComponent implements OnInit {
         organizationlevelsId: userToUpdate.organizationlevelsId || 2034,
         isActive: this.editIsActive,
         managerid: userToUpdate.managerid || "",
-        password: userToUpdate.password || "", // השרת עלול לדרוש מחרוזת לא null
+        password: userToUpdate.password || "", 
         salt: userToUpdate.salt || "",
         isTemporaryPassword: !!userToUpdate.isTemporaryPassword,
-        // וודא שהתאריך הוא בפורמט ISO תקין או null
         createDate: userToUpdate.createDate ? new Date(userToUpdate.createDate).toISOString() : new Date().toISOString(),
         lastUpdateDate: new Date().toISOString()
     };
@@ -151,7 +155,8 @@ export class UserListComponent implements OnInit {
         }
     });
   } 
-    
+  
+  // ביטול מצב עריכה
   cancelEdit() {
     this.selectedUser = {} as User;
     this.searchId = '';
@@ -162,6 +167,7 @@ export class UserListComponent implements OnInit {
     this.editIsActive = true;
   }
 
+  // הכנת משתמש חדש (איפוס שדות)
   prepareNewUser() {
     this.cancelEdit(); // איפוס שדות קיימים
     this.isNewUser = true;
@@ -169,30 +175,31 @@ export class UserListComponent implements OnInit {
     console.log('this.selectedUser: ' + this.selectedUser.id)
   }
 
+  // הוספת משתמש חדש
   saveNewUser() {
     // בניית אובייקט משתמש חדש תקין
     const newUser: User = {
-        id: this.searchId, // ה-ID שהוקלד בתיבת החיפוש/הוספה
+        id: this.searchId, 
         organizationlevelsId: 2034, // ID ברירת מחדל קיים ב-DB
         roleId: Number(this.editPosition), // המרה למספר
         username: this.editName,
         phone: this.editPhone,
         email: this.editEmail,
-        managerid: "", // שדה חובה ב-C# בדרך כלל
-        password: "TempPassword123", // סיסמה ראשונית (או מה שהגדרת בשרת)
-        salt: "DefaultSalt", 
+        managerid: "", 
+        password: "", 
+        salt: "", 
         isTemporaryPassword: true,
         isActive: true,
-        // שימוש בפורמט ISO שהשרת אוהב
+        // שימוש בפורמט ISO
         createDate: new Date().toISOString(),
         lastUpdateDate: new Date().toISOString()
     };
 
-    console.log('Sending new user to server:', newUser);
+    //console.log('Sending new user to server:', newUser);
 
     this.userService.addUser(newUser).subscribe({
         next: (res) => {
-            console.log('User added successfully:', res);
+            //console.log('User added successfully:', res);
             
             // הוספה למערך המקומי ועדכון התצוגה
             this.allUsers.push(res);
@@ -214,7 +221,7 @@ export class UserListComponent implements OnInit {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const phoneRegex = /^05\d-?\d{7}$/;
 
-    // בדיקה שקיימים ערכים לפני ה-Test (למניעת קריסה על null)
+    // בדיקה שקיימים ערכים לפני הפעולה
     const isEmailValid = this.editEmail ? emailRegex.test(this.editEmail) : false;
     const isPhoneValid = this.editPhone ? phoneRegex.test(this.editPhone) : false;
     const isNameValid = this.editName && this.editName.trim().length > 1;

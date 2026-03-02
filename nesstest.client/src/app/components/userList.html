@@ -103,12 +103,12 @@
 
                         <!-- תפקיד -->
                         <td data-th="תפקיד">
-                            <!-- מצב תצוגה: קריאה לפונקציית התרגום -->
+                            <!-- (מצב תצוגה: (פונקציית התרגום -->
                             <span *ngIf="selectedUser?.id !== user.id">
                                 {{getRoleName(user.roleId)}}
                             </span>
 
-                            <!-- מצב עריכה: Combo Box שמקושר ל-Code -->
+                            <!-- מצב עריכה -->
                             <select *ngIf="selectedUser?.id === user.id" 
                                     [(ngModel)]="editPosition" 
                                     name="editPosition" 
@@ -134,7 +134,7 @@
                                     class="form-control"
                                     [class.input-error]="phoneModel.invalid && phoneModel.touched">
                                 
-                                <!-- הודעת שגיאה קטנה מתחת ל-input בתוך התא -->
+                                <!-- validation -->
                                 <div *ngIf="phoneModel.invalid" class="error-text">
                                     <small *ngIf="phoneModel.errors?.['required']">חובה</small>
                                     <small *ngIf="phoneModel.errors?.['pattern']">לא תקין</small>
@@ -147,7 +147,7 @@
                                 <input id="userEmail" type="email" [(ngModel)]="editEmail"  name="editEmail" 
                                     required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #emailModel="ngModel" class="form-control">
                                 
-                                <!-- הצגת הודעת שגיאה אם האימייל לא תקין והמשתמש נגע בשדה -->
+                                <!-- validation-->
                                 <div *ngIf="emailModel.errors?.['pattern']" class="text-danger small">
                                 כתובת אימייל לא תקינה
                                 </div>
@@ -157,20 +157,21 @@
                             <span class="date">{{ user.createdDate | date:'dd/MM/yyyy' }}</span>
                         </td>
 
-                        <!-- עמודת פעיל - כעת עם אפשרות עריכה -->
+                        <!-- עמודת פעיל \ לא פעיל -->
                         <td data-th="פעיל" class="btnContainer">
                             <span *ngIf="selectedUser?.id !== user.id">{{ user.isActive ? 'כן' : 'לא' }}</span>
                             <input *ngIf="selectedUser?.id === user.id" type="checkbox" [(ngModel)]="editIsActive" name="editActive">
                         </td>
 
-                        <!-- עמודת פעולות -->
+                        <!-- events -->
                         <td data-th="עדכון" class="btnContainer">
+                            <!-- edit -->
                             <button *ngIf="selectedUser?.id !== user.id" type="button" class="editButton" (click)="editUser(user)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
                             <div *ngIf="selectedUser?.id === user.id" class="edit-actions">
-                                <!-- בכפתור השמירה (בתוך הטבלה או בטופס) -->
+                                <!-- save -->
                                 <button type="button" 
                                         (click)="saveChanges()" 
                                         [disabled]="isFormInvalid()"
@@ -179,6 +180,7 @@
                                     <i class="fa fa-check"></i>
                                 </button>
 
+                                <!-- cancel -->
                                 <button type="button" (click)="cancelEdit()" style="color: red; border: none; background: none; font-size: 1.2em; margin-right: 5px;">
                                     <i class="fa fa-times"></i>
                                 </button>

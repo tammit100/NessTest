@@ -14,10 +14,13 @@ namespace TestApp.Controllers
     [EnableCors(policyName: "CorsPolicy")]
     public class UsersController : ControllerBase
     {
+        // I started with json data file
         private readonly string _filePath = @"Data\users_new.json";
         private readonly ISession _session;
         private readonly IMapper _mapper;
 
+        #region working with data from file
+        // getting data from file
         private List<Users> GetUsersFromFile()
         {
             if (!System.IO.File.Exists(_filePath)) return new List<Users>();
@@ -32,16 +35,11 @@ namespace TestApp.Controllers
             return JsonSerializer.Deserialize<List<Users>>(json, options) ?? new List<Users>();
         }
 
+        // save data to file
         private void SaveUsersToFile(List<dynamic> users)
         {
             var json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
             System.IO.File.WriteAllText(_filePath, json);
-        }
-        
-        public UsersController(ISessionFactoryHelper sessionHelper, IMapper mapper)
-        {
-            _session = sessionHelper.GetSession();
-            _mapper = mapper;
         }
 
         //[HttpGet]
@@ -49,49 +47,6 @@ namespace TestApp.Controllers
         //{
         //    return Ok(GetUsersFromFile());
         //}
-
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            // שליפת כל הישויות מ-NHibernate
-            var userEntities = _session.Query<Entities.Dbo.Users>().ToList();
-            userEntities = userEntities.Where(w => IsUserWellFormed(w)).ToList();
-
-            // המרה של כל הרשימה ל-DTOs בעזרת AutoMapper
-            var users = _mapper.Map<List<Models.Users>>(userEntities);
-           
-            return Ok(users);
-        }
-
-        private bool IsUserWellFormed(Entities.Dbo.Users user)
-        {
-            if (user.Organizationlevels == null || user.Organizationlevels.Id <= 0)
-                return false;
-
-            if (user.Role == null || user.Role.Code == 0)
-                return false;
-
-            // 2. בדיקת Email בסיסית
-            if (string.IsNullOrWhiteSpace(user.Email) || !user.Email.Contains("@"))
-                return false;
-
-            // 3. בדיקת טלפון (לפחות 9 תווים)
-            if (string.IsNullOrWhiteSpace(user.Phone) || user.Phone.Length < 9)
-                return false;
-
-            return true;
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetUser(string id)
-        {
-            var userEntity = _session.Get<Entities.Dbo.Users>(id);
-            if (userEntity == null || !IsUserWellFormed(userEntity)) return NotFound();
-
-            // המרה מישות למודל לפני החזרה ל-Client
-            var user = _mapper.Map<Models.Users>(userEntity);
-            return Ok(user);
-        }
 
         //[HttpPut("{id}")]
         //public IActionResult UpdateUser(string id, [FromBody] JsonElement updatedUser)
@@ -147,35 +102,6 @@ namespace TestApp.Controllers
         //    return Ok(user);
         //}
 
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(string id, [FromBody] Models.Users userDto)
-        {
-            using (var transaction = _session.BeginTransaction())
-            {
-                try
-                {
-                    var userEntity = _session.Get<Entities.Dbo.Users>(id);
-                    if (userEntity == null) return NotFound();
-
-                    // מעדכן את הישות הקיימת בנתונים החדשים מה-DTO
-                    _mapper.Map(userDto, userEntity);
-                    userEntity.LastUpdateDate = DateTime.Now;
-
-                    _session.Update(userEntity);
-                    transaction.Commit();
-
-                    return Ok(_mapper.Map<Models.Users>(userEntity));
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
-
-
         //[HttpPost]
         //public IActionResult AddUser([FromBody] JsonElement newUser)
         //{
@@ -221,7 +147,94 @@ namespace TestApp.Controllers
 
         //    return Ok(userToAdd);
         //}
+        #endregion
 
+        public UsersController(ISessionFactoryHelper sessionHelper, IMapper mapper)
+        {
+            _session = sessionHelper.GetSession();
+            _mapper = mapper;
+        }
+
+
+        // כל המשתמשים התקינים
+        // IsUserWellFormed - סינון של רשומות לא בפורמט תקין
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            // שליפת כל הישויות מ-NHibernate
+            var userEntities = _session.Query<Entities.Dbo.Users>().ToList();
+            userEntities = userEntities.Where(w => IsUserWellFormed(w)).ToList();
+
+            // המרה של כל הרשימה ל-DTOs בעזרת AutoMapper
+            var users = _mapper.Map<List<Models.Users>>(userEntities);
+           
+            return Ok(users);
+        }
+
+        // בדיקת פורמט ותקינות נתונים לפני ההחזרה למשתמש
+        // לא בדיקה אמיתית  - רק מאפשר את  הבדיקה*******
+        private bool IsUserWellFormed(Entities.Dbo.Users user)
+        {
+            if (user.Organizationlevels == null || user.Organizationlevels.Id <= 0)
+                return false;
+
+            if (user.Role == null || user.Role.Code == 0)
+                return false;
+
+            // 2. בדיקת Email בסיסית
+            if (string.IsNullOrWhiteSpace(user.Email) || !user.Email.Contains("@"))
+                return false;
+
+            // 3. בדיקת טלפון (לפחות 9 תווים)
+            if (string.IsNullOrWhiteSpace(user.Phone) || user.Phone.Length < 9)
+                return false;
+
+            return true;
+        }
+
+        // קבלת משתמש לי קוד
+        [HttpGet("{id}")]
+        public IActionResult GetUser(string id)
+        {
+            var userEntity = _session.Get<Entities.Dbo.Users>(id);
+            if (userEntity == null || !IsUserWellFormed(userEntity)) return NotFound();
+
+            // המרת האוביקט Entity לאוביקט של Model
+            var user = _mapper.Map<Models.Users>(userEntity);
+            return Ok(user);
+        }
+
+        // עדבון משתמש 
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(string id, [FromBody] Models.Users userDto)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                try
+                {
+                    var userEntity = _session.Get<Entities.Dbo.Users>(id);
+                    if (userEntity == null) return NotFound();
+
+                    // המרת האוביקט Model לאוביקט של Entity
+                    _mapper.Map(userDto, userEntity);
+                    userEntity.LastUpdateDate = DateTime.Now;
+
+                    _session.Update(userEntity);
+                    transaction.Commit();
+
+                    return Ok(_mapper.Map<Models.Users>(userEntity));
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return BadRequest(ex.Message);
+                }
+            }
+        }
+
+
+        
+        // הוספת משתמש
         [HttpPost]
         public IActionResult AddUser([FromBody] Models.Users user)
         {
@@ -229,6 +242,7 @@ namespace TestApp.Controllers
             {
                 try
                 {
+                    // המרת האוביקט Model לאוביקט של Entity
                     var userEntity = _mapper.Map<Entities.Dbo.Users>(user);
                     userEntity.CreateDate = DateTime.Now;
                     userEntity.LastUpdateDate = DateTime.Now;

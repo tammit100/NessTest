@@ -45,6 +45,11 @@ namespace NessTest.Server.Controllers
             return Ok(roles);
         }
 
+
+        /// <summary>
+        /// To understand the data, in order to save real Organizationlevels.Id (with out null or 0)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("organizationlevels")]
         public IActionResult GetOrganizationlevelsMap()
         {

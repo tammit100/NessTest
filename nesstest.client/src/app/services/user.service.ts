@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../Models/User.model';
+import { Role } from '../Models/Role.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -13,22 +15,22 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
   // משתמשים
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>('Users');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('Users');
   }
 
   // עדכון
-  updateUser(user: any): Observable<any> {
-    return this.http.put('Users/' + user.id, user);
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>('Users/' + user.id, user);
   }
   
   // תפקידים
-  getRoles(): Observable<any[]> {
-    return this.http.get<any[]>('Roles');
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>('Roles');
   }
 
   // הוספת משתמש
-  addUser(user: any): Observable<any> {
-    return this.http.post('Users', user);
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>('Users', user);
   }
 }
